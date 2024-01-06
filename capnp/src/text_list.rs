@@ -128,12 +128,12 @@ impl<'a> Builder<'a> {
         self.len() == 0
     }
 
-    pub fn set(&mut self, index: u32, value: crate::text::Reader) {
+    pub fn set(&mut self, index: u32, value: &str) {
         assert!(index < self.len());
         self.builder
             .reborrow()
             .get_pointer_element(index)
-            .set_text(value);
+            .set_text(value.into());
     }
 
     pub fn into_reader(self) -> Reader<'a> {

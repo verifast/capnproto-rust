@@ -1075,14 +1075,14 @@ fn generate_setter(
                 }
                 type_::Text(()) => {
                     setter_interior.push(Line(format!(
-                        "self.builder.reborrow().get_pointer_field({offset}).set_text(value);"
+                        "self.builder.reborrow().get_pointer_field({offset}).set_text(value.into());"
                     )));
                     initter_interior.push(Line(format!(
                         "self.builder.get_pointer_field({offset}).init_text(size)"
                     )));
                     initter_params.push("size: u32");
                     (
-                        Some(fmt!(ctx, "{capnp}::text::Reader<'_>")),
+                        Some("&str".into()),
                         Some(fmt!(ctx, "{capnp}::text::Builder<'a>")),
                     )
                 }
